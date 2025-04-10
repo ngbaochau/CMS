@@ -1,17 +1,14 @@
-import React, { createContext, useEffect, useState } from 'react';
-
+import React, { createContext, useEffect, useState, useContext } from 'react';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-
-    // Check if user is logged in on page load
     useEffect(() => {
         const checkAuthStatus = () => {
-            const token = localStorage.getItem('cms_token');
-            const userData = localStorage.getItem('cms_user');
+            const token = localStorage.getItem('token');
+            const userData = localStorage.getItem('user');
 
             if (token && userData) {
                 setUser(JSON.parse(userData));
@@ -24,27 +21,20 @@ export const AuthProvider = ({ children }) => {
         checkAuthStatus();
     }, []);
 
-    // Login function
     const login = (userData, token) => {
-        localStorage.setItem('cms_token', token);
-        localStorage.setItem('cms_user', JSON.stringify(userData));
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(userData));
         setUser(userData);
         setIsAuthenticated(true);
     };
-
-    // Logout function
     const logout = () => {
-        localStorage.removeItem('cms_token');
-        localStorage.removeItem('cms_user');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         setUser(null);
         setIsAuthenticated(false);
     };
-
-    // Register function
     const register = async (userData) => {
-        // In a real app, this would make an API call
         console.log('Registering user:', userData);
-        // Simulate successful registration
         return { success: true };
     };
 

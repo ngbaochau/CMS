@@ -1,16 +1,16 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import AppRouter from './router/AppRouter';
 import { AuthProvider } from './context/AuthContext';
-import { ToastProvider } from './context/ToastContext';
-
-function App() {
+const App = () => {
   return (
     <AuthProvider>
-      <ToastProvider>
+      <Router>
         <AppRouter />
-      </ToastProvider>
+      </Router>
     </AuthProvider>
   );
-}
-
+};
 export default App;
+
+
