@@ -2,39 +2,26 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
 import Account from './Accounts.js';
 
-const Project = sequelize.define('Project', {
-  ProjectID: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+const Project = sequelize.define(
+  'Project',
+  {
+    project_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    project_name: { type: DataTypes.TEXT, allowNull: false },
+    description: DataTypes.TEXT,
+    account_id: { type: DataTypes.INTEGER, allowNull: false },
+    start_date: DataTypes.DATE,
+    end_date: DataTypes.DATE,
+    track: {
+      type: DataTypes.ENUM('Planning', 'InProgress', 'OnHold', 'Cancelled', 'Completed', 'Overdue'),
+      allowNull: false,
+      defaultValue: 'Planning',
+    },
+    create_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
+    update_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },
-  ProjectName: {
-    type: DataTypes.STRING(30),
-    allowNull: false
-  },
-  Description: {
-    type: DataTypes.TEXT
-  },
-  AccountID: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Account,
-      key: 'AccountID'
-    }
-  },
-  StartDate: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  EndDate: {
-    type: DataTypes.DATE
-  }
-}, {
-  tableName: 'Projects',
-  timestamps: false
-});
+  { tableName: 'Projects', timestamps: false },
+);
 
-Project.belongsTo(Account, { foreignKey: 'AccountID' });
+Project.belongsTo(Account, { foreignKey: 'account_id' });
 
 export default Project;

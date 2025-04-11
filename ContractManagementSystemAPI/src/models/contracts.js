@@ -2,56 +2,36 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
 import Project from './Projects.js';
 
-const Contract = sequelize.define('Contract', {
-  ContractID: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+const Contract = sequelize.define(
+  'Contract',
+  {
+    contract_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    title: { type: DataTypes.STRING(100), allowNull: false },
+    project_id: { type: DataTypes.INTEGER, allowNull: false },
+    sign_date: DataTypes.DATE,
+    total_amount: DataTypes.FLOAT,
+    working_days: DataTypes.INTEGER,
+    start_date: DataTypes.DATE,
+    end_date: DataTypes.DATE,
+    status: {
+      type: DataTypes.ENUM(
+        'Draft',
+        'WaitingForApproval',
+        'Signed',
+        'InEffect',
+        'Terminated',
+        'Expired',
+        'Cancelled',
+      ),
+      allowNull: false,
+      defaultValue: 'Draft',
+    },
+    create_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
+    update_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },
-  ContractCode: {
-    type: DataTypes.STRING(255),
-    allowNull: false
-  },
-  Title: {
-    type: DataTypes.STRING(100),
-    allowNull: false
-  },
-  ProjectID: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Project,
-      key: 'ProjectID'
-    }
-  },
-  SignDate: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  TotalAmount: {
-    type: DataTypes.FLOAT,
-    allowNull: false
-  },
-  WorkingDays: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  StartDate: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  EndDate: {
-    type: DataTypes.DATE
-  },
-  Status: {
-    type: DataTypes.ENUM('Draft', 'WaitingForApproval', 'Signed', 'InEffect', 'Terminated', 'Expired', 'Cancelled'),
-    allowNull: false
-  }
-}, {
-  tableName: 'Contracts',
-  timestamps: false
-});
+  { tableName: 'Contracts', timestamps: false },
+);
 
-Contract.belongsTo(Project, { foreignKey: 'ProjectID' });
+Contract.belongsTo(Project, { foreignKey: 'project_id' });
 
 export default Contract;

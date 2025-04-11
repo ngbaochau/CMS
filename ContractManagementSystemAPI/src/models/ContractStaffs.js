@@ -1,45 +1,25 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
-import User from './Users.js';
 import Contract from './Contracts.js';
+import User from './Users.js';
 import ContractRole from './ContractRoles.js';
 
-const ContractStaff = sequelize.define('ContractStaff', {
-  ContractID: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: Contract,
-      key: 'ContractID'
-    },
-    allowNull: false
+const ContractStaff = sequelize.define(
+  'ContractStaff',
+  {
+    contract_staff_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    contract_id: { type: DataTypes.INTEGER, allowNull: false },
+    user_id: { type: DataTypes.INTEGER, allowNull: false },
+    contract_role_id: { type: DataTypes.INTEGER, allowNull: false },
+    assigned_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
+    create_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
+    update_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },
-  UserID: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: User,
-      key: 'UserID'
-    },
-    allowNull: false
-  },
-  ContractRoleID: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: ContractRole,
-      key: 'ContractRoleID'
-    },
-    allowNull: false
-  },
-  AssignedAt: {
-    type: DataTypes.DATE,
-    defaultValue: Sequelize.NOW
-  }
-}, {
-  tableName: 'ContractStaffs',
-  timestamps: false
-});
+  { tableName: 'ContractStaffs', timestamps: false },
+);
 
-ContractStaff.belongsTo(Contract, { foreignKey: 'ContractID' });
-ContractStaff.belongsTo(User, { foreignKey: 'UserID' });
-ContractStaff.belongsTo(ContractRole, { foreignKey: 'ContractRoleID' });
+ContractStaff.belongsTo(Contract, { foreignKey: 'contract_id' });
+ContractStaff.belongsTo(User, { foreignKey: 'user_id' });
+ContractStaff.belongsTo(ContractRole, { foreignKey: 'contract_role_id' });
 
 export default ContractStaff;
