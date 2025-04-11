@@ -10,15 +10,15 @@
     "prettier": "^3.5.3"
   },
   "lint-staged": {
-    "FrontEnd/**/*.{js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "ContractManagementSystemAPI/**/*.{js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
-  },
+  "ContractManagementSystemAPI/**/*.js": [
+    "eslint --fix",
+    "prettier --write"
+  ],
+  "FrontEnd/**/*.{js,jsx}": [
+    "eslint --fix",
+    "prettier --write"
+  ]
+},
   "name": "cms",
   "version": "1.0.0",
   "description": "",
