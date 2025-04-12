@@ -30,14 +30,16 @@ const RegisterForm = () => {
       toast.error('Password and confirm password do not match!');
       return;
     }
+    
     setIsSubmitting(true);
-
+  
     try {
       const response = await registerUser(formData);
-
-      if (response && response.status === 200){
-        toast.success(`${response.message}`);
-        
+  
+      console.log('Response:', response); // Log để kiểm tra phản hồi từ backend
+  
+      if (response?.message) {
+        toast.success(response.message);
         setFormData({
           username: '',
           password: '',
@@ -51,7 +53,7 @@ const RegisterForm = () => {
       }
     } catch (error) {
       if (error.response?.status === 409) {
-        toast.warning(`${error.response.data.message}`);
+        toast.warning(error.response.data.message); // Hiển thị thông báo lỗi nếu trùng tên người dùng
       } else {
         toast.error('An error occurred, please try again later!');
       }
@@ -59,6 +61,7 @@ const RegisterForm = () => {
       setIsSubmitting(false);
     }
   };
+  
 
   return (
     <div>
