@@ -1,4 +1,6 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -20,7 +22,7 @@ const sendConfirmationEmail = async (toEmail, token) => {
       subject: 'Confirm account registration',
       html: `
         <h3>Welcome!</h3>
-        <p>Please click on the link below to confirm your account.:</p>
+        <p>Please click on the link below to confirm your account:</p>
         <a href="${link}">Verify account</a>
       `
     });
@@ -28,8 +30,8 @@ const sendConfirmationEmail = async (toEmail, token) => {
     console.log("✅ Email đã được gửi:", info.messageId);
   } catch (err) {
     console.error("❌ Gửi email thất bại:", err);
-    throw err; 
+    throw err;
   }
 };
 
-module.exports = sendConfirmationEmail;
+export default sendConfirmationEmail;

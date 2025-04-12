@@ -1,15 +1,15 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const validateRegister = require('../middlewares/validateRegister');
-const sendConfirmationEmail = require('../utils/sendConfirmationEmail');
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { validateRegister } from '../middlewares/validateRegister.js';
+import sendConfirmationEmail from '../utils/sendConfirmationEmail.js';
+import sequelize from '../config/db.js';
+import { DataTypes } from 'sequelize';
+import UserModel from '../models/User.js';
+import AppRoleModel from '../models/AppRole.js';
 
-const sequelize = require('../config/db');
-const { DataTypes } = require('sequelize');
-
-const User = require('../models/User')(sequelize, DataTypes);
-const AppRole = require('../models/AppRole')(sequelize, DataTypes);
-
+const User = UserModel(sequelize, DataTypes);
+const AppRole = AppRoleModel(sequelize, DataTypes);
 const router = express.Router();
 
 router.post('/register', validateRegister, async (req, res) => {
@@ -18,13 +18,11 @@ router.post('/register', validateRegister, async (req, res) => {
   try {
     const existingUser = await User.findOne({ where: { UserName: username } });
     if (existingUser) {
-      return res.status(409).json({ message: 'Tên người dùng đã tồn tại.' });
+      return res.status(409).json({ message: 'Username already exists.' });
     }
 
-   
     const hashedPassword = await bcrypt.hash(password, 10);
 
-   
     const newUser = await User.create({
       UserName: username,
       Password: hashedPassword,
@@ -36,12 +34,10 @@ router.post('/register', validateRegister, async (req, res) => {
       IsActive: false,
     });
 
-    
     const token = jwt.sign({ userId: newUser.UserID }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     });
 
-   
     await sendConfirmationEmail(email, token);
 
     return res.status(201).json({
@@ -53,23 +49,33 @@ router.post('/register', validateRegister, async (req, res) => {
   }
 });
 
-
 router.get('/confirm/:token', async (req, res) => {
   try {
     const decoded = jwt.verify(req.params.token, process.env.JWT_SECRET);
     const user = await User.findByPk(decoded.userId);
 
-    if (!user) return res.status(404).send('User not found.');
-    if (user.IsActive) return res.send('Previously verified account.');
+    if (user.IsActive) {
+      return res.send(`
+        <script>
+          alert('⚠️ Previously Verified Account.');
+          window.location.href = 'http://localhost:3001/login';
+        </script>
+      `);
+    }
 
     user.IsActive = true;
     await user.save();
 
-    res.send('✅ Your account has been successfully verified.!');
+    return res.redirect('http://localhost:3001/auth/verify-success');
   } catch (err) {
     console.error('❌ Email confirmation error:', err);
-    res.status(400).send('❌ The confirmation link is invalid or has expired.');
+    return res.send(`
+      <script>
+        alert('❌ Verification link is invalid or expired.');
+        window.location.href = 'http://localhost:3001/login';
+      </script>
+    `);
   }
 });
 
-module.exports = router;
+export default router;

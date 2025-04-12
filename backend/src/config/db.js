@@ -1,12 +1,13 @@
-const { Sequelize } = require('sequelize');
-require('dotenv').config();  
+import { Sequelize } from 'sequelize';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const sequelize = new Sequelize({
-  host: process.env.DB_HOST,        
-  dialect: 'mysql',                  
-  username: process.env.DB_USERNAME, 
-  password: process.env.DB_PASSWORD, 
-  database: process.env.DB_DATABASE, 
+  host: process.env.DB_HOST,
+  dialect: 'mysql',
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
 });
 
 sequelize.authenticate()
@@ -17,4 +18,4 @@ sequelize.authenticate()
     console.error('Không thể kết nối đến cơ sở dữ liệu:', err);
   });
 
-module.exports = sequelize;
+export default sequelize;

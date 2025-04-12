@@ -1,10 +1,10 @@
-const dotenv = require('dotenv');
-dotenv.config(); 
+import dotenv from 'dotenv';
+dotenv.config();
 
-const express = require('express');
-const cors = require('cors');
-const sequelize = require('./src/config/db');
-const authRoutes = require('./src/routers/auth'); 
+import express from 'express';
+import cors from 'cors';
+import sequelize from './src/config/db.js';
+import authRoutes from './src/routers/auth.js';
 
 const app = express();
 const PORT = 3000;
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.use('/api', authRoutes); 
+app.use('/api', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`✅ Server đang chạy tại http://localhost:${PORT}`);
