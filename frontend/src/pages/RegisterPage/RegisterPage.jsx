@@ -27,7 +27,7 @@ const RegisterForm = () => {
     e.preventDefault();
     
     if (formData.password !== formData.confirmPassword) {
-      toast.error('❌ Password and confirm password do not match!');
+      toast.error('Password and confirm password do not match!');
       return;
     }
     setIsSubmitting(true);
@@ -35,8 +35,8 @@ const RegisterForm = () => {
     try {
       const response = await registerUser(formData);
 
-      if (response && response.message?.startsWith('Registration successful')) {
-        toast.success(`✅ ${response.message}`);
+      if (response && response.status === 200){
+        toast.success(`${response.message}`);
         
         setFormData({
           username: '',
@@ -51,9 +51,9 @@ const RegisterForm = () => {
       }
     } catch (error) {
       if (error.response?.status === 409) {
-        toast.warning(`⚠️ ${error.response.data.message}`);
+        toast.warning(`${error.response.data.message}`);
       } else {
-        toast.error('❌ An error occurred, please try again later!');
+        toast.error('An error occurred, please try again later!');
       }
     } finally {
       setIsSubmitting(false);

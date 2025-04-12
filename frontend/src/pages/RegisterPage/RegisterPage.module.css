@@ -1,6 +1,3 @@
-/* RegisterPage.module.css */
-
-/* Overall form styling */
 .form {
     max-width: 500px;
     margin: 0 auto;
@@ -10,12 +7,10 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for each input group */
 .formGroup {
     margin-bottom: 15px;
 }
 
-/* Căn giữa tiêu đề */
 h2 {
     text-align: center;
     font-size: 24px;
@@ -23,8 +18,6 @@ h2 {
     color: #333;
   }
   
-
-/* Label styling */
 .label {
     display: block;
     font-weight: bold;
@@ -33,7 +26,6 @@ h2 {
     color: #333;
 }
 
-/* Input field styling */
 .input {
     width: 100%;
     padding: 10px;
@@ -48,7 +40,6 @@ h2 {
     border-color: #007BFF;
 }
 
-/* Button styling */
 .button {
     width: 100%;
     padding: 12px;
@@ -64,7 +55,6 @@ h2 {
     background-color: #0056b3;
 }
 
-/* Responsive design for smaller screens */
 @media (max-width: 600px) {
     .form {
         padding: 15px;

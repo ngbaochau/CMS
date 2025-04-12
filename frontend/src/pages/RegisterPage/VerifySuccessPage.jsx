@@ -10,7 +10,7 @@ function VerifySuccessPage() {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '100px' }}>
-      <h1 style={{ color: 'green' }}>🎉 Account has been verified!</h1>
+      <h1 style={{ color: 'green' }}>Account has been verified!</h1>
       <p>You have successfully verified your account..</p>
       <p>Press "OK" to go to the login page.</p>
       <button
