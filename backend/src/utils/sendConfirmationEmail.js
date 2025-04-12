@@ -27,9 +27,9 @@ const sendConfirmationEmail = async (toEmail, token) => {
       `
     });
 
-    console.log("✅ Email đã được gửi:", info.messageId);
+    console.log("Email đã được gửi:", info.messageId);
   } catch (err) {
-    console.error("❌ Gửi email thất bại:", err);
+    console.error("Gửi email thất bại:", err);
     throw err;
   }
 };

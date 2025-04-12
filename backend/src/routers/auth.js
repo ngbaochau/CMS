@@ -44,7 +44,7 @@ router.post('/register', validateRegister, async (req, res) => {
       message: 'Registration successful! Please check your email to confirm your account.',
     });
   } catch (err) {
-    console.error('❌ Error during registration:', err);
+    console.error('Error during registration:', err);
     return res.status(500).json({ message: 'Error processing registration.' });
   }
 });
@@ -57,7 +57,7 @@ router.get('/confirm/:token', async (req, res) => {
     if (user.IsActive) {
       return res.send(`
         <script>
-          alert('⚠️ Previously Verified Account.');
+          alert('Previously Verified Account.');
           window.location.href = 'http://localhost:3001/login';
         </script>
       `);
@@ -68,10 +68,10 @@ router.get('/confirm/:token', async (req, res) => {
 
     return res.redirect('http://localhost:3001/auth/verify-success');
   } catch (err) {
-    console.error('❌ Email confirmation error:', err);
+    console.error('Email confirmation error:', err);
     return res.send(`
       <script>
-        alert('❌ Verification link is invalid or expired.');
+        alert('Verification link is invalid or expired.');
         window.location.href = 'http://localhost:3001/login';
       </script>
     `);
