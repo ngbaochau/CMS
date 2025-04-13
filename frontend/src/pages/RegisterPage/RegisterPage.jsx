@@ -35,9 +35,6 @@ const RegisterForm = () => {
   
     try {
       const response = await registerUser(formData);
-  
-      console.log('Response:', response); // Log để kiểm tra phản hồi từ backend
-  
       if (response?.message) {
         toast.success(response.message);
         setFormData({
@@ -53,7 +50,7 @@ const RegisterForm = () => {
       }
     } catch (error) {
       if (error.response?.status === 409) {
-        toast.warning(error.response.data.message); // Hiển thị thông báo lỗi nếu trùng tên người dùng
+        toast.warning(error.response.data.message); 
       } else {
         toast.error('An error occurred, please try again later!');
       }

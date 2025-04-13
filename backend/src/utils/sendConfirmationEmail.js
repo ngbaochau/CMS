@@ -2,7 +2,6 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// Cấu hình transporter cho Nodemailer
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
