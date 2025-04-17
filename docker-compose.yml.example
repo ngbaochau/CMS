@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: my-mysql-with-data:latest
+    container_name: mysql_test
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: yourpassword
+      MYSQL_DATABASE: contractmanagement
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - backend-net
+
+volumes:
+  mysql-data:
+
+networks:
+  backend-net:
