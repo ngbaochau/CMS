@@ -13,8 +13,13 @@ const Account = sequelize.define(
     address: DataTypes.TEXT,
     created_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
     updated_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
+    status: {
+      type: DataTypes.ENUM('contract', 'pending', 'active', 'inactive'),
+      allowNull: false,
+      defaultValue: 'contract',
+    },
   },
-  { tableName: 'Accounts', timestamps: false },
+  { tableName: 'Accounts', timestamps: false }
 );
 
 export default Account;
