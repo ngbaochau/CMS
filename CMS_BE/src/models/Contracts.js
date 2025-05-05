@@ -18,6 +18,12 @@ const Contract = sequelize.define(
       allowNull: false,
       defaultValue: 'Draft',
     },
+    document_link: { type: DataTypes.STRING(500), allowNull: true },
+    is_active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
     created_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
     updated_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },

@@ -12,6 +12,11 @@ const Account = sequelize.define(
     status: {type: DataTypes.ENUM('contract', 'pending', 'active', 'inactive'), defaultValue: "contract"},
     url: DataTypes.STRING,
     address: DataTypes.TEXT,
+    is_active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
     created_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
     updated_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },

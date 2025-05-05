@@ -10,6 +10,11 @@ const ContractHistory = sequelize.define(
     action: { type: DataTypes.STRING, allowNull: false },
     action_time: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
     detail: DataTypes.JSON,
+    is_active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
     created_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },
   { tableName: 'ContractHistories', timestamps: false },
