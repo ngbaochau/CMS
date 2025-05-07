@@ -8,6 +8,7 @@ import VerifySuccessPage from '../pages/RegisterPage/VerifySuccessPage';
 import VerifyFailedPage from '../pages/RegisterPage/VerifyFailedPage';
 import Accounts from '../pages/Account/Account';
 import Projects from '../pages/Projects/Projects';
+import Users from '../pages/UserPage/UserPage';
 import Home from '../pages/Home/Home';
 import MainLayout from '../pages/layout/MainLayout';
 import AccountDetails from '../pages/Account/AccountDetails';
@@ -31,6 +32,7 @@ const AppRouter = () => {
         />
         <Route path="/home/accounts/:id" element={<AccountDetails />} />
         <Route path="/home/projects" element={<Projects />} />
+        <Route path="/home/users" element={<Users />} />
       </Route>
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />

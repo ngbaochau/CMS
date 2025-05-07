@@ -10,6 +10,7 @@ import {
   ReceiptText,
   Sun,
   User,
+  CircleUser,
 } from 'lucide-react';
 import { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -41,6 +42,12 @@ const menuItems = [
     id: 6,
     icon: <ReceiptText color="rgb(63, 63, 63)" size={24} />,
     name: 'Invoices',
+  },
+  {
+    page: '/home/users',
+    id: 7,
+    icon: <CircleUser color="rgb(63, 63, 63)" size={24} />,
+    name: 'Users',
   },
 ];
 const MainLayout = () => {
