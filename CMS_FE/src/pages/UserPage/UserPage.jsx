@@ -13,6 +13,12 @@ import BreadCrumbs from '../../components/BreadCrumbs';
 import { Tooltip } from 'react-tooltip';
 import { validateRequiredField, validateUserUpdate } from '../../utils/validators.js';
 
+const headerAPI = {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('cms_token') || ''}`,
+  },
+};
+
 const UserPage = () => {
   const [userData, setUserData] = useState({ data: [], totalPages: 0 });
   const [page, setPage] = useState(1);
@@ -34,7 +40,7 @@ const UserPage = () => {
 
   const fetchAllUsers = async () => {
     try {
-      const response = await api.get(`/users/getAllUsers?page=${page}&limit=${limit}`);
+      const response = await api.get(`/users/getAllUsers?page=${page}&limit=${limit}`, headerAPI);
       setUserData(response.data);
     } catch (error) {
       toast.error(`Error: ${error?.message || 'Failed to fetch users'}`);
@@ -43,7 +49,10 @@ const UserPage = () => {
 
   const searchUsers = async () => {
     try {
-      const response = await api.get(`/users/searchUser?query=${encodeURIComponent(keyword)}`);
+      const response = await api.get(
+        `/users/searchUser?query=${encodeURIComponent(keyword)}`,
+        headerAPI
+      );
       setUserData(response.data);
     } catch (error) {
       toast.error(`Error: ${error?.message || 'Failed to search users'}`);
@@ -90,10 +99,10 @@ const UserPage = () => {
     }
 
     try {
-      await api.put(`/users/updateUser/${userIdToEdit}`, userUpdating);
+      await api.put(`/users/updateUser/${userIdToEdit}`, userUpdating, headerAPI);
       toast.success('User updated successfully');
 
-      const response = await api.get(`/users/getAllUsers?page=${page}&limit=${limit}`);
+      const response = await api.get(`/users/getAllUsers?page=${page}&limit=${limit}`, headerAPI);
       setUserData(response.data);
 
       setShowUserForm(false);
@@ -135,10 +144,10 @@ const UserPage = () => {
     }
 
     try {
-      await api.put(`/users/deactivateUserById/${userIdToDelete}`, { is_active: 0 });
+      await api.put(`/users/deactivateUserById/${userIdToDelete}`, { is_active: 0 }, headerAPI);
       toast.success('User deactivated successfully');
 
-      const response = await api.get(`/users/getAllUsers?page=${page}&limit=${limit}`);
+      const response = await api.get(`/users/getAllUsers?page=${page}&limit=${limit}`, headerAPI);
       setUserData(response.data);
 
       setOpenConfirmDialog(false);

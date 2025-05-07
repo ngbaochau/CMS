@@ -5,11 +5,13 @@ import {
   searchUsers,
   getAllUsers,
 } from '../controllers/userController.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
+import { hasRoleAdmin } from '../middlewares/Role.js';
 const router = express.Router();
 
-router.put('/updateUser/:id', updateUserById);
-router.put('/deactivateUserById/:id', deactivateUserById);
-router.get('/searchUser', searchUsers);
-router.get('/getAllUsers', getAllUsers);
+router.put('/updateUser/:id', authMiddleware, hasRoleAdmin, updateUserById);
+router.put('/deactivateUserById/:id', authMiddleware, hasRoleAdmin, deactivateUserById);
+router.get('/searchUser', authMiddleware, hasRoleAdmin, searchUsers);
+router.get('/getAllUsers', authMiddleware, hasRoleAdmin, getAllUsers);
 
 export default router;
