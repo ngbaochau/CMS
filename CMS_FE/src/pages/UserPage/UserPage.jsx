@@ -264,11 +264,16 @@ const UserPage = () => {
           <div className="breadcrumbs-container">
             <BreadCrumbs />
           </div>
+        </div>
+        <div className="float-right mb-4">
           <TextField
             type="search"
             placeholder="Search by Name, Email."
             width={300}
             borderRadius={50}
+            style={{
+              float: 'right',
+            }}
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             iconLeft={<Search size={20} color="#666" />}
