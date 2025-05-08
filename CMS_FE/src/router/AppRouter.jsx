@@ -12,11 +12,11 @@ import Contracts from '../pages/Contract/Contract';
 import Home from '../pages/Home/Home';
 import MainLayout from '../pages/layout/MainLayout';
 import AccountDetails from '../pages/Account/AccountDetails';
-import ContractDetails from '../pages/Contract/ContractDetails';
 import RegisterSuccessPage from '../pages/RegisterPage/RegisterSuccessPage';
 import { AccountProvider } from '../context/AccountContext';
 import { ContractProvider } from '../context/ContractContext';
 import ForgotPasswordPage from '../pages/LoginPage/ForgotPasswordSuccessPage';
+import ContractDetails from '../pages/ContractDetailPage/ContractDetail';
 import { ProjectProvider } from '../context/ProjectContext';
 
 const AppRouter = () => {

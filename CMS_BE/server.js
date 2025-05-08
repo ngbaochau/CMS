@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import cors from 'cors';
 import accountRouter from './src/routers/Accounts.js';
+import contractRoutes from './src/routers/ContractDetails.js';
 import contractRouter from './src/routers/Contracts.js';
 import projectRouter from './src/routers/Projects.js';
 import express from 'express';
@@ -20,6 +21,8 @@ app.use(
 );
 app.use('/api', authRouters);
 app.use('/api/accounts', accountRouter);
+app.use('/api/contract-detail', contractRoutes);
+
 app.use('/api/contracts', contractRouter);
 app.use('/api/projects', projectRouter);
 app.listen(PORT, () => {

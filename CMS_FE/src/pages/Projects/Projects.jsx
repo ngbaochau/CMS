@@ -189,7 +189,7 @@ const Projects = () => {
                     <td className="project-detail-link">
                       <a
                         onClick={() => {
-                          nav(`/home/Projects/${item.id}`);
+                          nav(`/home/projects/${item.id}`);
                         }}
                       >
                         {`${item.name} (${item.id})`}

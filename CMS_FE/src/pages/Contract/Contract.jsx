@@ -15,8 +15,6 @@ import ConfirmDialog from '../../components/Dialogs.jsx/ConfirmDialog';
 const Contract = () => {
   const nav = useNavigate();
   const { id } = useParams();
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
 
   const {
     fetchProjectDataById,
@@ -32,6 +30,10 @@ const Contract = () => {
     selectContractId,
     fetchContractDataById,
     setContractCreating,
+    page,
+    setPage,
+    limit,
+    setLimit,
   } = useContext(ContractContext);
   const [showDialog, setShowDialog] = useState(false);
 
