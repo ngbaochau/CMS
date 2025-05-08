@@ -21,9 +21,10 @@ const ContractForm = () => {
   } = useContext(ContractContext);
   useEffect(() => {
     if (!isEdit) {
+      let id = contractCreating.project_id;
       setContractCreating({
         title: '',
-        project_id: '',
+        project_id: id,
         status: 'Draft',
         signed_date: '',
         start_date: '',
