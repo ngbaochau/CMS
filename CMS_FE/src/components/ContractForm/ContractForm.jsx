@@ -8,7 +8,7 @@ import './contractForm.css';
 import { toast } from 'react-toastify';
 const isDateAfter = (after, before) =>
   after && before && new Date(after).setHours(0, 0, 0, 0) >= new Date(before).setHours(0, 0, 0, 0);
-const ContractForm = ({ contractData }) => {
+const ContractForm = () => {
   const {
     showAddForm,
     toggleAddForm,
@@ -19,11 +19,6 @@ const ContractForm = ({ contractData }) => {
     contractCreating,
     setContractCreating,
   } = useContext(ContractContext);
-  useEffect(() => {
-    if (isEdit && contractData) {
-      setContractCreating(contractData);
-    }
-  }, [contractData, isEdit]);
   useEffect(() => {
     if (!isEdit) {
       setContractCreating({
