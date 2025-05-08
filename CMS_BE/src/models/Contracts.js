@@ -27,7 +27,7 @@ const Contract = sequelize.define(
     created_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
     updated_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },
-  { tableName: 'Contracts', timestamps: false },
+  { tableName: 'Contracts', timestamps: false }
 );
 
 Contract.belongsTo(Project, { foreignKey: 'project_id' });

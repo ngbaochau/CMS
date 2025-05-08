@@ -19,7 +19,7 @@ const ContractRole = sequelize.define(
     created_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
     updated_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },
-  { tableName: 'ContractRoles', timestamps: false },
+  { tableName: 'ContractRoles', timestamps: false }
 );
 
 export default ContractRole;

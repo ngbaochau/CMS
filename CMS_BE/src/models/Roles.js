@@ -15,7 +15,7 @@ const Role = sequelize.define(
     created_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
     updated_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },
-  { tableName: 'Roles', timestamps: false },
+  { tableName: 'Roles', timestamps: false }
 );
 
 export default Role;

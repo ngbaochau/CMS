@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
+import Project from './Projects.js';
 
 const Account = sequelize.define(
   'Account',
@@ -9,7 +10,10 @@ const Account = sequelize.define(
     contact_person: { type: DataTypes.STRING(50), allowNull: false },
     email: { type: DataTypes.STRING(50), allowNull: false },
     phone: DataTypes.STRING(10),
-    status: {type: DataTypes.ENUM('contract', 'pending', 'active', 'inactive'), defaultValue: "contract"},
+    status: {
+      type: DataTypes.ENUM('contract', 'pending', 'active', 'inactive'),
+      defaultValue: 'contract',
+    },
     url: DataTypes.STRING,
     address: DataTypes.TEXT,
     is_active: {
@@ -20,7 +24,12 @@ const Account = sequelize.define(
     created_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
     updated_at: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
   },
-  { tableName: 'Accounts', timestamps: false },
+  { tableName: 'Accounts', timestamps: false }
 );
 
+// Account.hasMany(Project, { foreignKey: 'account_id', as: 'projects' });
+
+Account.associate = function(models) {
+  Account.hasMany(models.Project, { foreignKey: 'account_id', as: 'projects' });
+};
 export default Account;
